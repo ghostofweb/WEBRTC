@@ -1,15 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSocket } from '../providers/Socket'
 
 const Home = () => {
   const {socket} = useSocket()
-  socket.emit("join-room",{roomId:"1",emailId:"abc@gmail.com"})
+  const [email,setEmail] = useState();
+  const [roomId,setRoomId] = useState()
+
+  useEffect(()=>{
+    socket.on("joined-room")
+  })
+  const handleJoinRoom = (e) => {
+    e.preventDefault()
+    socket.emit("join-room",{emailId:email,roomId})
+  }
   return (
     <div className='homepage-container'>
         <div className='input-container'>
-            <input type="email" placeholder='Enter your email here' />
-            <input type="text" placeholder='Enter Room Code' />
-            <button>Join</button>
+            <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder='Enter your email here' />
+            <input type="text" placeholder='Enter Room Code'  value={roomId} onChange={e => setRoomId(e.target.value)} />
+            <button onClick={handleJoinRoom}>Join</button>
         </div>
     </div>
   )

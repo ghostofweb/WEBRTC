@@ -20,6 +20,7 @@ io.on("connection",socket=>{
         console.log("user",emailId,"joined room",roomId);
         emailToSocketMapping.set(emailId,socket.id)
         socket.join(roomId)
+        socket.emit("joined-room",{roomId})
         socket.broadcast.to(roomId).emit("user-joined",{emailId})
     })
 })
