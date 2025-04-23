@@ -5,12 +5,12 @@ import { SocketProvider } from './providers/Socket';
 function App() {
   return (
     <div className='App'>
-    <SocketProvider>
+  <SocketProvider>
    <Routes>
     <Route path='/' element={<Home/>} />
     <Route path='/h' element={<h1>Home1</h1>} />
    </Routes>
-    </SocketProvider>
+  </SocketProvider>
     </div>
   );
 }

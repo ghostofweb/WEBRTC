@@ -6,9 +6,13 @@ const Home = () => {
   const [email,setEmail] = useState();
   const [roomId,setRoomId] = useState()
 
+  const handleRoomJoined = ({roomId}) => {
+    console.log("joined room",roomId)
+  }
   useEffect(()=>{
-    socket.on("joined-room")
-  })
+    socket.on("joined-room",handleRoomJoined)
+  },[socket])
+
   const handleJoinRoom = (e) => {
     e.preventDefault()
     socket.emit("join-room",{emailId:email,roomId})
