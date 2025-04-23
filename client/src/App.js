@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes,Router, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Home from './Pages/Home';
 function App() {
   return (
