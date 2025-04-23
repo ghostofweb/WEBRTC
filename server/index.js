@@ -15,8 +15,7 @@ io.on("connection",socket=>{
     socket.on("join-room",data =>{
         const {roomId,emailId} = data
         console.log("user",emailId,"joined room",roomId);
-        if(!emailToSocketMapping.has(emailId)){
-            emailToSocketMapping.set(emailId,socket.id)
+        emailToSocketMapping.set(emailId,socket.id)
         socket.join(roomId)
         socket.broadcast.to(roomId).emit("user-joined",{emailId})
     })
