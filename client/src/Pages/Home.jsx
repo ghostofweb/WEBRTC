@@ -1,6 +1,9 @@
 import React from 'react'
+import { useSocket } from '../providers/Socket'
 
 const Home = () => {
+  const {socket} = useSocket()
+  socket.emit("join-room",{roomId:"1",emailId:"abc@gmail.com"})
   return (
     <div className='homepage-container'>
         <div className='input-container'>
