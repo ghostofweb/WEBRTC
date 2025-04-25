@@ -3,7 +3,7 @@ import React, { useMemo } from "react";
 const PeerContext = React.createContext();
 
 export const usePeer = () => {
- React.useContext(PeerContext);
+   return React.useContext(PeerContext);
 }
 
 export const PeerProvider = (props) =>{
@@ -24,6 +24,13 @@ export const PeerProvider = (props) =>{
         const offer = await peer.createOffer();
         await peer.setLocalDescription(offer);
         return offer;
+    }
+    
+    const createAnswer = async (offer)=>{
+        await peer.setRemoteDescription(offer);
+        const answer = await peer.createAnswer();
+        await peer.setLocalDescription(answer);
+        return answer;
     }
     return (
         <PeerContext.Provider value={{peer,createOffer}}>

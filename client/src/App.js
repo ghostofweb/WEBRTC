@@ -7,14 +7,14 @@ import { PeerProvider } from './providers/Peer';
 function App() {
   return (
     <div className='App'>
-  <SocketProvider>
     <PeerProvider>
+  <SocketProvider>
    <Routes>
     <Route path='/' element={<Home/>} />
     <Route path='/room/:roomId' element={<Room/>} />
    </Routes>
-    </PeerProvider>
   </SocketProvider>
+    </PeerProvider>
     </div>
   );
 }
