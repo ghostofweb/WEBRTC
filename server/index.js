@@ -35,8 +35,14 @@ io.on("connection",socket=>{
             offer,
         })
     })
+    socket.on("call-accepted",data=>{
+        const {emailId,ans} = data;
+        const socketId = emailToSocketMapping.get(emailId);
+        socket.to(socketId).emit("call-accepted",{
+            ans,
+        })
 
-    
+    })
 })
 app.listen(port,()=>{
     console.log(`Server is running on port ${port}`)

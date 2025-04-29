@@ -32,8 +32,19 @@ export const PeerProvider = (props) =>{
         await peer.setLocalDescription(answer);
         return answer;
     }
+
+    const setRemoteAnswer = (ans) =>{
+        peer.setRemoteDescription(ans);
+    }
+
+    const sendStream = async(stream)=>{
+        const tracks = stream.getTracks();
+        for(const track of tracks){
+            peer.addTrack(track,stream);
+        }
+    }
     return (
-        <PeerContext.Provider value={{peer,createOffer}}>
+        <PeerContext.Provider value={{peer,createOffer,createAnswer,setRemoteAnswer,sendStream}}>
             {props.children}
         </PeerContext.Provider>
     )
