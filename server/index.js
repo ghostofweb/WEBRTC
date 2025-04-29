@@ -43,6 +43,17 @@ io.on("connection",socket=>{
         })
 
     })
+
+    // relay ICE candidates
+    socket.on('ice-candidate', ({ to, candidate }) => {
+        const targetSocketId = emailToSocketMapping.get(to);
+        console.log('Relaying ICE candidate to:', to, 'candidate:', candidate);
+        if (targetSocketId) {
+          socket.to(targetSocketId).emit('ice-candidate', { candidate });
+        } else {
+          console.error('Target socket not found for:', to);
+        }
+      });
 })
 app.listen(port,()=>{
     console.log(`Server is running on port ${port}`)
